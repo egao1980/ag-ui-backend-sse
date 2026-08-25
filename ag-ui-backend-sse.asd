@@ -3,7 +3,7 @@
   :description "SSE transport backend for ag-ui-protocol"
   :author "egao1980"
   :license "MIT"
-  :depends-on ("ag-ui-protocol" "sse-protocol")
+  :depends-on ("ag-ui-protocol" "rpc-protocol" "rpc-backend-sse" "sse-protocol")
   :serial t
   :pathname "src"
   :components ((:file "package")
