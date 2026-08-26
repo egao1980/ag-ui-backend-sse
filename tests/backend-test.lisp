@@ -28,3 +28,18 @@
                   backend
                   (ag-ui-protocol:make-run-agent-input :thread-id "t" :run-id "r"))
                  'ag-ui-protocol:ag-ui-error))))
+
+(deftest run-agent-use-value
+  (let ((backend (ag-ui-backend-sse:make-sse-ag-ui-backend
+                  :url "http://127.0.0.1:9/"))
+        (http-protocol:*http-backend* nil)
+        (events (list (ag-ui-protocol:make-run-started-event
+                       :thread-id "t" :run-id "r"))))
+    (ok (equal events
+               (handler-bind ((ag-ui-protocol:ag-ui-error
+                               (lambda (c)
+                                 (ag-ui-protocol:invoke-use-value events c))))
+                 (ag-ui-protocol:run-agent
+                  backend
+                  (ag-ui-protocol:make-run-agent-input
+                   :thread-id "t" :run-id "r")))))))

@@ -20,7 +20,7 @@
 
 (defun %ensure-url (backend)
   (or (backend-url backend)
-      (error 'ag-ui-protocol:ag-ui-error
+      (error 'ag-ui-protocol:ag-ui-run-error
              :message "sse AG-UI backend has no :url")))
 
 (defun %body-string (response)
@@ -54,7 +54,8 @@
                                           ("accept" . "text/event-stream"))))
                (status (http-protocol:response-status res)))
           (unless (<= 200 status 299)
-            (error 'ag-ui-protocol:ag-ui-error
+            (error 'ag-ui-protocol:ag-ui-run-error
+                   :code status
                    :message (format nil "HTTP ~a" status)))
           (ag-ui-protocol:decode-ag-ui-sse-stream (%body-string res)
                                                   :on-event on-event)))
