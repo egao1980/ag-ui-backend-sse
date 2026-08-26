@@ -3,6 +3,8 @@
   (:export #:sse-ag-ui-backend
            #:make-sse-ag-ui-backend
            #:use-sse-ag-ui-backend
-           #:backend-transport))
+           #:backend-url
+           #:backend-agent
+           #:backend-path))
 
 (in-package #:ag-ui-backend-sse)
