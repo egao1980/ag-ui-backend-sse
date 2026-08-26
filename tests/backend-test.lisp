@@ -35,11 +35,11 @@
         (http-protocol:*http-backend* nil)
         (events (list (ag-ui-protocol:make-run-started-event
                        :thread-id "t" :run-id "r"))))
-    (ok (equal events
-               (handler-bind ((ag-ui-protocol:ag-ui-error
+    (let ((got (handler-bind ((ag-ui-protocol:ag-ui-error
                                (lambda (c)
-                                 (ag-ui-protocol:invoke-use-value events c))))
+                                 (use-value events c))))
                  (ag-ui-protocol:run-agent
                   backend
                   (ag-ui-protocol:make-run-agent-input
-                   :thread-id "t" :run-id "r")))))))
+                   :thread-id "t" :run-id "r")))))
+      (ok (equal events got)))))
