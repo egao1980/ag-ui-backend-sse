@@ -1,9 +1,14 @@
 (defsystem "ag-ui-backend-sse"
-  :version "0.1.0"
-  :description "SSE transport backend for ag-ui-protocol"
+  :version "0.2.0"
+  :description "SSE transport backend for ag-ui-protocol (POST RunAgentInput → events)"
   :author "egao1980"
   :license "MIT"
-  :depends-on ("ag-ui-protocol" "rpc-protocol" "rpc-backend-sse" "sse-protocol")
+  :depends-on ("ag-ui-protocol"
+               "sse-protocol"
+               "sse-backend-clack"
+               "http-protocol"
+               "http-server-protocol"
+               "babel")
   :serial t
   :pathname "src"
   :components ((:file "package")
