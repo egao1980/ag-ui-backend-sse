@@ -9,6 +9,7 @@
                "http-protocol"
                "http-server-protocol"
                "babel")
+  :properties (:cl-repo (:ci (:with ("dissect"))))
   :serial t
   :pathname "src"
   :components ((:file "package")
