@@ -1,5 +1,5 @@
 (defsystem "ag-ui-backend-sse"
-  :version "0.2.0"
+  :version "0.2.1"
   :description "SSE transport backend for ag-ui-protocol (POST RunAgentInput → events)"
   :author "egao1980"
   :license "MIT"
@@ -8,6 +8,8 @@
                "sse-backend-clack"
                "http-protocol"
                "http-server-protocol"
+               "event-protocol"
+               "io-protocol"
                "babel")
   :properties (:cl-repo (:ci (:with ("dissect"))))
   :serial t
@@ -17,7 +19,7 @@
   :in-order-to ((test-op (test-op "ag-ui-backend-sse/tests"))))
 
 (defsystem "ag-ui-backend-sse/tests"
-  :depends-on ("ag-ui-backend-sse" "rove")
+  :depends-on ("ag-ui-backend-sse" "event-protocol" "rove")
   :pathname "tests"
   :serial t
   :components ((:file "package")
