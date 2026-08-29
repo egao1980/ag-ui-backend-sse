@@ -5,6 +5,17 @@
              'ag-ui-backend-sse:sse-ag-ui-backend))
   (ok (typep ag-ui-protocol:*ag-ui-backend* 'ag-ui-backend-sse:sse-ag-ui-backend)))
 
+(deftest claims-streaming
+  (let ((caps (ag-ui-protocol:get-capabilities
+               (ag-ui-backend-sse:make-sse-ag-ui-backend
+                :agent (ag-ui-protocol:make-ag-ui-agent :name "sse")))))
+    (ok (equal "sse" (ag-ui-protocol:identity-name
+                      (ag-ui-protocol:capabilities-identity caps))))
+    (ok (ag-ui-protocol:transport-streaming-p
+         (ag-ui-protocol:capabilities-transport caps)))
+    (ng (ag-ui-protocol:transport-http-binary-p
+         (ag-ui-protocol:capabilities-transport caps)))))
+
 (deftest local-run-without-url
   (let* ((backend (ag-ui-backend-sse:make-sse-ag-ui-backend
                    :agent (ag-ui-protocol:make-ag-ui-agent)))

@@ -63,6 +63,15 @@
                        (ag-ui-protocol:make-ag-ui-agent))))
         (ag-ui-protocol:run-agent agent input :on-event on-event))))
 
+(defmethod ag-ui-protocol:get-capabilities ((backend sse-ag-ui-backend))
+  (ag-ui-protocol:make-agent-capabilities
+   :identity (make-instance 'ag-ui-protocol:identity-capabilities
+                            :name (ag-ui-protocol:ag-ui-agent-name
+                                   (or (backend-agent backend)
+                                       (ag-ui-protocol:make-ag-ui-agent))))
+   :transport (make-instance 'ag-ui-protocol:transport-capabilities
+                             :streaming t)))
+
 (defmethod ag-ui-protocol:serve-ag-ui ((backend sse-ag-ui-backend)
                                        &key (path nil)
                                          (host "127.0.0.1")
