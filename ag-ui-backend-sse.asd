@@ -1,9 +1,9 @@
 (defsystem "ag-ui-backend-sse"
-  :version "0.2.0"
+  :version "0.2.1"
   :description "SSE transport backend for ag-ui-protocol (POST RunAgentInput → events)"
   :author "egao1980"
   :license "MIT"
-  :depends-on ("ag-ui-protocol"
+  :depends-on ((:version "ag-ui-protocol" "0.3.0")
                "sse-protocol"
                "sse-backend-clack"
                "http-protocol"
